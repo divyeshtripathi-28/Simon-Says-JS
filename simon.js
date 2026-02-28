@@ -33,17 +33,25 @@ function loadGame() {
                 setTimeout(levelUp, 1000);
             }
             else{
-                levelShow.innerHTML = "Game Over! Press Any Key To Start Again";
-                loadGame();
+                levelShow.innerHTML = `Game Over! Your Score was <b>${level}</b> <br> Press Any Key To Start Again`;
+                gameOver();
             }
         }
 
         if(userSeq[idx] !== gameSeq[idx]){
-            levelShow.innerHTML = "Game Over! Press Any Key To Start Again";
-            loadGame();
+            levelShow.innerHTML = `Game Over! Your Score was <b>${level}</b> <br> Press Any Key To Start Again`;
+            gameOver();
         }
-        
-        
+           
+    }
+
+    function gameOver() {
+        document.querySelector("body").style.backgroundColor = "red";
+        setTimeout(() => {
+            document.querySelector("body").style.backgroundColor = "white";
+        },150);
+
+        loadGame();
     }
 
     function randomFlash() {
@@ -76,5 +84,7 @@ function loadGame() {
     for(btn of allBtns){
         btn.addEventListener('click', btnPress);
     }
+
+
 }
 
