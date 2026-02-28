@@ -1,12 +1,13 @@
-loadGame();
 
-function loadGame() {
     let gameSeq = [];
     let userSeq = [];
 
     let btns = ["yellow", "red", "blue", "green"];
     let started = false;
     let level = 0;
+    
+    let highScore = JSON.parse(localStorage.getItem('highScore')) || 0;
+
 
     let levelShow = document.querySelector(".level");
 
@@ -28,18 +29,25 @@ function loadGame() {
     }
 
     function checkBtn(idx) {
+
+        if(level > highScore){
+            highScore = level;
+            localStorage.setItem('highScore',JSON.stringify(highScore));
+        }
+
         if(idx == gameSeq.length-1){
+
             if(userSeq[idx] === gameSeq[idx]){
                 setTimeout(levelUp, 1000);
             }
             else{
-                levelShow.innerHTML = `Game Over! Your Score was <b>${level}</b> <br> Press Any Key To Start Again`;
+                levelShow.innerHTML = `Game Over! Your Score was <b>${level}</b> <br> Press Any Key To Start Again <br> HighScore: ${highScore}`;
                 gameOver();
             }
         }
 
         if(userSeq[idx] !== gameSeq[idx]){
-            levelShow.innerHTML = `Game Over! Your Score was <b>${level}</b> <br> Press Any Key To Start Again`;
+            levelShow.innerHTML = `Game Over! Your Score was <b>${level}</b> <br> Press Any Key To Start Again <br> HighScore: ${highScore}`;
             gameOver();
         }
            
@@ -51,11 +59,14 @@ function loadGame() {
             document.querySelector("body").style.backgroundColor = "white";
         },150);
 
-        loadGame();
+         gameSeq = [];
+         userSeq = [];
+         started = false;
+         level = 0;
     }
 
     function randomFlash() {
-        let randIdx = Math.floor(Math.random() * 3);
+        let randIdx = Math.floor(Math.random() * 4);
 
         let randomColor = btns[randIdx];
         let randBtn = document.querySelector(`.${randomColor}`);
@@ -84,7 +95,3 @@ function loadGame() {
     for(btn of allBtns){
         btn.addEventListener('click', btnPress);
     }
-
-
-}
-
