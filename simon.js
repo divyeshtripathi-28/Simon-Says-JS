@@ -37,17 +37,17 @@
 
         if(idx == gameSeq.length-1){
 
-            if(userSeq[idx] === gameSeq[idx]){
+            if (userSeq[idx] === gameSeq[idx]){
                 setTimeout(levelUp, 1000);
             }
-            else{
-                levelShow.innerHTML = `Game Over! Your Score was <b>${level}</b> <br> Press Any Key To Start Again <br> HighScore: ${highScore}`;
+            else {
+                levelShow.innerHTML = `Game Over! Your Score was <b>${level}</b> <br> HighScore: ${highScore} <br> Press Any Key To Start Again `;
                 gameOver();
             }
         }
 
         if(userSeq[idx] !== gameSeq[idx]){
-            levelShow.innerHTML = `Game Over! Your Score was <b>${level}</b> <br> Press Any Key To Start Again <br> HighScore: ${highScore}`;
+            levelShow.innerHTML = `Game Over! Your Score was <b>${level}</b> <br> HighScore: ${highScore} <br> Press Any Key To Start Again`;
             gameOver();
         }
            
